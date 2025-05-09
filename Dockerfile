@@ -1,4 +1,4 @@
-FROM python:3.13-alpine
+FROM python:3.11-alpine
 LABEL maintainer="roswerbooks.com"
 
 ENV PYTHONUNBUFFERED 1
@@ -12,11 +12,15 @@ EXPOSE 8000
 ARG DEV=false
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache mariadb-connector-c-dev && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base mariadb-dev musl-dev && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
+    apk del .tmp-build-deps && \
     adduser \
         --disabled-password \
         --no-create-home \
