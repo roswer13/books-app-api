@@ -1,8 +1,12 @@
 """
 Tests for the models in the app.
 """
+import uuid
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+
+from core import models
 
 
 class UserModelTests(TestCase):
@@ -91,3 +95,33 @@ class UserModelTests(TestCase):
             password='test123'
         )
         self.assertTrue(user.is_reader())
+
+    def test_create_book(self):
+        """Test creating a book"""
+        book = models.Book.objects.create(
+            uuid=uuid.uuid4(),
+            title='Test Book',
+            author='Test Author',
+            created_at='2023-01-01',
+            updated_at='2023-01-01',
+        )
+
+        self.assertEqual(str(book), book.title)
+
+    def test_creeate_page(self):
+        """Test creating a page"""
+        book = models.Book.objects.create(
+            uuid=uuid.uuid4(),
+            title='Test Book',
+            author='Test Author',
+            created_at='2023-01-01',
+            updated_at='2023-01-01',
+        )
+        page = models.Page.objects.create(
+            uuid=uuid.uuid4(),
+            book=book,
+            number=1,
+            content='This is a test page.',
+        )
+
+        self.assertEqual(str(page), f'Page {page.number} of {page.book.title}')
