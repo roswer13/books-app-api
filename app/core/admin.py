@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from core.models import User, Page, Book
 
 
+@admin.register(User)
 class UserAdmin(BaseUserAdmin):
     """Define the admin pages for users."""
     ordering = ['id']
@@ -20,6 +21,7 @@ class UserAdmin(BaseUserAdmin):
         ),
         (_('Important dates'), {'fields': ('last_login',)})
     )
+    search_fields = ['email', 'name']
     readonly_fields = ['last_login']
     add_fieldsets = (
         (None, {
@@ -32,6 +34,29 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
-admin.site.register(User, UserAdmin)
-admin.site.register(Page)
-admin.site.register(Book)
+class PageInline(admin.TabularInline):
+    """Inline for pages in the book admin."""
+    model = Page
+    extra = 0
+    fields = ["number", "content"]
+    readonly_fields = ["number",]
+    show_change_link = True
+    ordering = ["number"]
+
+
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    """Define the admin pages for books."""
+    list_display = ['title', 'author']
+    search_fields = ['title', 'author']
+    inlines = [PageInline]
+
+    readonly_fields = ['created_at', 'updated_at', 'uuid']
+
+
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    """Define the admin pages for pages."""
+    list_display = ['uuid', 'book', 'number']
+    search_fields = ['book__title']
+    readonly_fields = ['uuid',]
