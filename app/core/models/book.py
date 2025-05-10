@@ -59,3 +59,7 @@ class Page(models.Model):
     def __str__(self):
         """Return string representation of page."""
         return f"Page {self.number} of {self.book.title}"
+
+    class Meta:
+        unique_together = ('book', 'number')
+        ordering = ['number']
