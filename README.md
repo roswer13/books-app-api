@@ -4,7 +4,7 @@ Books App API is a Django-based application that allows you to manage books, pag
 
 ---
 
-## **Características**
+## **Features**
 
 - **Book Management**: Create, update, list and delete books.
 - **Page Management**: Associate pages to books, with uniqueness validation by page number within a book.
@@ -47,11 +47,11 @@ Books App API is a Django-based application that allows you to manage books, pag
 Create an .env file in the root directory with the following variables:
 
 ```bash
-DB_NAME=devdb
-DB_USER=devuser
-DB_PASSWORD=devpassword
-DB_HOST=db
-DB_PORT=3306
+DB_NAME=dbname
+DB_USER=rootuser
+DB_PASS=changeme
+DJANGO_SECRET_KEY=changeme
+DJANGO_ALLOWED_HOSTS=127.0.0.1
 ```
 
 3. **Build and Lift Containers**
