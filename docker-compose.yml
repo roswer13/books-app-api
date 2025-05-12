@@ -16,9 +16,9 @@ services:
              python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=devpassword
       - DEBUG=1
     depends_on:
       - db
@@ -29,10 +29,10 @@ services:
       - dev-db-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - MYSQL_DATABASE=${DB_NAME}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASS}
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      MYSQL_DATABASE: devdb
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpassword
+      MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - "3306:3306"
 
