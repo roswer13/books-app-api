@@ -21,6 +21,11 @@ Dispone de un archivo `docker-compose-deploy.yml` que permite levantar la aplica
 - [Crear usuario IAM](#crear-usuario-iam)
 - [Cargar de SSH Key en AWS (Windows)](#cargar-de-ssh-key-en-aws-windows)
 - [Crear una instancia EC2](#crear-una-instancia-ec2)
+- [Configuración GitHub deploy key (Opcional)](#congiguración-github-deploy-key-opcional)
+- [Instalación de Docker, Docker Compose y Git en la instancia EC2](#instalación-de-docker-docker-compose-y-git-en-la-instancia-ec2)
+- [Clonar el repositorio en la instancia EC2](#clonar-el-repositorio-en-la-instancia-ec2)
+- [Desplegar la aplicación en la instancia EC2](#desplegar-la-aplicación-en-la-instancia-ec2)
+- [Acceder a la aplicación](#acceder-a-la-aplicación)
 
 ---
 
@@ -81,6 +86,7 @@ Para comprobar que la aplicación en modo producción funciona correctamente en 
     DB_NAME=dbname
     DB_USER=rootuser
     DB_PASS=changeme
+    DB_ROOT_PASS=changeme
     DJANGO_SECRET_KEY=changeme
     DJANGO_ALLOWED_HOSTS=127.0.0.1
     ```
@@ -205,12 +211,12 @@ Si deseas utilizar una clave SSH para autenticarte en GitHub desde tu instancia 
         ```
     - Para instalar Docker:
         ```bash
-        sudo dnf install docker -y
+        sudo yum install docker -y
         ```
     - Para habilitar el servicio de Docker:
         ```bash
-        sudo systemctl enable docker.service
-        sudo systemctl start docker.service
+        sudo systemctl start docker
+        sudo systemctl enable docker
         ```
     - Para usar Docker sin sudo:
         ```bash
@@ -218,10 +224,13 @@ Si deseas utilizar una clave SSH para autenticarte en GitHub desde tu instancia 
         ```
     - Para instalar Docker Compose:
         ```bash
-        sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        mkdir -p ~/.docker/cli-plugins/
         ```
+        ```bash
+        curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
         ```
-        sudo chmod +x /usr/local/bin/docker-compose
+        ```bash
+        chmod +x ~/.docker/cli-plugins/docker-compose
         ```
 
 ---
@@ -256,11 +265,18 @@ Nota: El campo `DJANGO_ALLOWED_HOSTS` debe contener la dirección IP pública de
 - Ejecuta el siguiente comando para levantar la aplicación en modo producción:
 
     ```bash
-    docker-compose -f docker-compose-deploy.yml up -d
+    docker compose -f docker-compose-deploy.yml up -d
     ```
 - Abre tu navegador y accede a `http://IP_PUBLICA/api/docs/` para comprobar que la aplicación está funcionando correctamente.
 - Para ingresar a Django Admin, accede a `http://IP_PUBLICA/admin/` y utiliza las credenciales de superusuario, para generarlo puedes usar el siguiente comando:
 
     ```bash
-    docker-compose -f docker-compose-deploy.yml run -rm app sh -c "python manage.py createsuperuser"
+    docker compose -f docker-compose-deploy.yml run -rm app sh -c "python manage.py createsuperuser"
     ```
+
+## Acceder a la aplicación
+- Abre tu navegador y accede a `http://IP_PUBLICA/api/docs/` para comprobar que la aplicación está funcionando correctamente.
+
+---
+
+[Version en inglés](deploy-doc-en.md)

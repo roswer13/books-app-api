@@ -4,6 +4,20 @@ Books App API is a Django-based application that allows you to manage books, pag
 
 ---
 
+## **Table of Contents** 📋
+
+- [Features](#features)
+- [Technologies Used](#technologies-used-🛠️)
+- [Prerequisites](#prerequisites)
+- [Project Configuration](#project-configuration-⚙️)
+- [Principal Endpoints](#principal-endpoints-🚀)
+- [API Documentation](#api-documentation-📖)
+- [Testing](#testing-🧪)
+- [Deployment](#deployment-🌐)
+- [Features to Implement](#features-to-implement-🚧)
+- [Author](#author-👤)
+
+
 ## **Features**
 
 - **Book Management**: Create, update, list and delete books.
@@ -15,24 +29,20 @@ Books App API is a Django-based application that allows you to manage books, pag
 - **Validations**: Data validation such as uniqueness of pages per book.
 - **Authentication**: Token-based to protect endpoints.
 
----
-
-## **Technologies Used**
+## **Technologies Used** 🛠️
 
 - **Backend**: Django and Django REST Framework.
 - **Database**: MySQL.
 - **Containers**: Docker and Docker Compose.
+- **Authentication**: Simple JWT for token management.
+- **Proxy**: Nginx for reverse proxy.
 - **Testing**: Full coverage with `unittest` and API validations.
 - **Documentation**: Automatically generated with `drf-spectacular`.
-
----
 
 ## **Prerequisites**
 - Python 3.10 or higher.
 - Docker and Docker Compose installed.
 - MySQL 8.0 or higher (if not using Docker for the database).
-
----
 
 ## **Project Configuration** ⚙️
 
@@ -50,6 +60,7 @@ Create an .env file in the root directory with the following variables:
 DB_NAME=dbname
 DB_USER=rootuser
 DB_PASS=changeme
+DB_ROOT_PASS=changeme
 DJANGO_SECRET_KEY=changeme
 DJANGO_ALLOWED_HOSTS=127.0.0.1
 ```
@@ -77,8 +88,6 @@ Si necesitas acceso administrativo, crea un superusuario:
 docker-compose run app sh -c "python manage.py createsuperuser"
 ```
 
----
-
 ## **Principal Endpoints** 🚀
 - **Books**:
   - `GET /api/book/books/`: List all books.
@@ -95,7 +104,6 @@ docker-compose run app sh -c "python manage.py createsuperuser"
     - `POST /api/user/refresh/`: Refresh the authentication token.
     - `GET /api/user/me/`: Retrieve the authenticated user's information.
 
-
 ## **API Documentation** 📖
 
 The API documentation is automatically generated using `drf-spectacular`. You can access it at:
@@ -110,3 +118,16 @@ To run the tests, execute the following command:
 ```bash
 docker-compose run app sh -c "python manage.py test"
 ```
+
+## **Deployment** 🌐
+
+For deployment, you can use Docker to create a production image, see the docs for [more information](docs/deploy-doc-es.md).
+
+
+## **Features to Implement** 🚧
+
+See the next file for [more information](docs/feature.md).
+
+## **Author** 👤
+
+**Roswer García** - [LinkedIn](https://www.linkedin.com/in/roswergarcia/)
