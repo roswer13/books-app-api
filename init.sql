@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS devdb;
+CREATE DATABASE IF NOT EXISTS test_devdb;
+
+CREATE USER IF NOT EXISTS 'devuser'@'%' IDENTIFIED BY 'devpass';
+
+GRANT ALL PRIVILEGES ON devdb.* TO 'devuser'@'%';
+GRANT ALL PRIVILEGES ON test_devdb.* TO 'devuser'@'%';
+
+FLUSH PRIVILEGES;
