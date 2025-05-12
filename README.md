@@ -4,6 +4,20 @@ Books App API is a Django-based application that allows you to manage books, pag
 
 ---
 
+## **Table of Contents** 📋
+
+- [Features](#features)
+- [Technologies Used](#technologies-used-🛠️)
+- [Prerequisites](#prerequisites)
+- [Project Configuration](#project-configuration-⚙️)
+- [Principal Endpoints](#principal-endpoints-🚀)
+- [API Documentation](#api-documentation-📖)
+- [Testing](#testing-🧪)
+- [Deployment](#deployment-🌐)
+- [Features to Implement](#features-to-implement-🚧)
+- [Author](#author-👤)
+
+
 ## **Features**
 
 - **Book Management**: Create, update, list and delete books.
