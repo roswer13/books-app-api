@@ -15,6 +15,21 @@ Books App API is a Django-based application that allows you to manage books, pag
 - **Validations**: Data validation such as uniqueness of pages per book.
 - **Authentication**: Token-based to protect endpoints.
 
+## Project Structure
+
+```
+books-app-api/
+|___ app/ (Django Backend settings)
+|   |___ app/
+|   |    |___ settings.py
+|   |    |___ wsgi.py
+|   |___ manage.py
+|___ proxy/ (Nginx configuration)
+|___ docker-compose.yml
+|___ docker-compose-deploy.yml
+|___ requirements.txt
+```
+
 ## **Technologies Used** 🛠️
 
 - **Backend**: Django and Django REST Framework.
@@ -26,7 +41,7 @@ Books App API is a Django-based application that allows you to manage books, pag
 - **Documentation**: Automatically generated with `drf-spectacular`.
 
 ## **Prerequisites**
-- Python 3.10 or higher.
+- Python 3.9 or higher.
 - Docker and Docker Compose installed.
 - MySQL 8.0 or higher (if not using Docker for the database).
 
@@ -86,7 +101,7 @@ docker-compose run app sh -c "python manage.py createsuperuser"
     - `GET /api/book/pages/{uuid}/`: Retrieve a specific page.
     - `PATCH /api/book/pages/{uuid}/`: Update a specific page.
 - **Authentication**:
-    - `POST /api/user/tokern/`: Obtain a token for authentication.
+    - `POST /api/user/token/`: Obtain a token for authentication.
     - `POST /api/user/refresh/`: Refresh the authentication token.
     - `GET /api/user/me/`: Retrieve the authenticated user's information.
 

@@ -31,16 +31,16 @@ Dispone de un archivo `docker-compose-deploy.yml` que permite levantar la aplica
 
 ## Estructura del proyecto
 ```
-app
+books-app-api/
 |___ app/ (Django Backend settings)
 |   |___ app/
 |   |    |___ settings.py
 |   |    |___ wsgi.py
 |   |___ manage.py
 |___ proxy/ (Nginx configuration)
-docker-compose.yml
-docker-compose-deploy.yml
-requirements.txt
+|___ docker-compose.yml
+|___ docker-compose-deploy.yml
+|___ requirements.txt
 ```
 
 ## Pre-visualización de la aplicación modo DEBUG con Docker

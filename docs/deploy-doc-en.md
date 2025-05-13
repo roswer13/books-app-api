@@ -31,16 +31,16 @@ It has a `docker-compose-deploy.yml` file that allows to deploy the application 
 ## Project Structure
 
 ```
-app
+books-app-api/
 |___ app/ (Django Backend settings)
 |   |___ app/
 |   |    |___ settings.py
 |   |    |___ wsgi.py
 |   |___ manage.py
 |___ proxy/ (Nginx configuration)
-docker-compose.yml
-docker-compose-deploy.yml
-requirements.txt
+|___ docker-compose.yml
+|___ docker-compose-deploy.yml
+|___ requirements.txt
 ```
 
 ## Pre-visualization of the application in DEBUG mode with Docker
